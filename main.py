@@ -1,3 +1,9 @@
+from fastapi import FastAPI, HTTPException
+import undetected_chromedriver as uc
+import time
+
+app = FastAPI()
+
 @app.get("/scrape")
 def scrape_mercadolivre(url: str):
     options = uc.ChromeOptions()
@@ -15,7 +21,7 @@ def scrape_mercadolivre(url: str):
 
         # Captura o título real da página renderizada
         page_title = driver.title
-        # Captura o início do código fonte
+        # Captura os primeiros 1000 caracteres do código fonte
         html_snippet = driver.page_source[:1000]
 
         return {
